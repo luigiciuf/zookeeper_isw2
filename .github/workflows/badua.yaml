@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: 0
 
       - name: Set up JDK 8
         uses: actions/setup-java@v4
@@ -33,28 +33,28 @@ jobs:
         run: |
           git clone https://github.com/saeg/ba-dua
           cd ba-dua
-          git checkout d2401f0  # Sostituisci con l'hash del commit desiderato
+          git checkout d2401f0
           mvn clean install
           cd ..
 
       - name: Build and analyze zookeeper project
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mvn clean verify -P badua -Dfile.encoding=UTF-8
 
       - name: Print target directory structure
         run: |
           echo "Printing target directory structure"
-          find target -type d
+          find target -type d || true
 
-      - name: Create necessary directories
+      - name: Ensure common directory exists
         run: mkdir -p target/classes/org/apache/zookeeper/common
 
-      - name: Print directory contents
+      - name: Print contents of common directory
         run: |
           echo "Contents of target/classes/org/apache/zookeeper/common"
-          ls -la target/classes/org/apache/zookeeper/common
+          ls -la target/classes/org/apache/zookeeper/common || true
 
       - name: Create reports directory if not exists
         run: mkdir -p reports/surefire-reports
