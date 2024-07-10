@@ -33,6 +33,12 @@
 
   <dependencies>
     <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>7.5</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>com.github.spotbugs</groupId>
       <artifactId>spotbugs-annotations</artifactId>
       <scope>provided</scope>
@@ -278,8 +284,8 @@
           </includes>
           <forkCount>${surefire-forkcount}</forkCount>
           <reuseForks>false</reuseForks>
-          <!--
-          <argLine>-Xmx512m -Dtest.junit.threads=${surefire-forkcount} -Dzookeeper.junit.threadid=${surefire.forkNumber} -javaagent:${org.jmockit:jmockit:jar}</argLine> -->
+
+          <argLine>-Xmx512m -Dtest.junit.threads=${surefire-forkcount} -Dzookeeper.junit.threadid=${surefire.forkNumber} -javaagent:${org.jmockit:jmockit:jar}</argLine>
           <basedir>${project.basedir}</basedir>
           <systemPropertyVariables>
             <build.test.dir>${project.build.directory}/surefire</build.test.dir>
@@ -325,8 +331,7 @@
             </Export-Package>
             <Bundle-Name>ZooKeeper Bundle</Bundle-Name>
             <Bundle-DocURL>https://zookeeper.apache.org/doc/current/</Bundle-DocURL>
-            <!--
-            <Implementation-Build>${mvngit.commit.id}</Implementation-Build> -->
+            <Implementation-Build>${mvngit.commit.id}</Implementation-Build>
             <Merge-Headers>!Implementation-Build,*</Merge-Headers>
           </instructions>
           <classifier>osgi</classifier>
@@ -368,6 +373,9 @@
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
             <version>0.8.8</version>
+            <configuration>
+              <dataFile>${project.build.directory}/jacoco.exec</dataFile>
+            </configuration>
             <executions>
               <execution>
                 <goals>
@@ -404,10 +412,10 @@
                 </goals>
                 <configuration>
                   <targetClasses>
-                    <param>org.apache.zookeeper.my.Prova</param>
+                    <param>org.apache.zookeeper.common.PathTrie</param>
                   </targetClasses>
                   <targetTests>
-                    <param>org.apache.zookeeper.my.ProvaTest</param>
+                    <param>org.apache.zookeeper.common.PathTrieTest</param>
                   </targetTests>
                 </configuration>
               </execution>
@@ -425,12 +433,12 @@
         <dependency>
           <groupId>br.usp.each.saeg</groupId>
           <artifactId>ba-dua-cli</artifactId>
-          <version>0.8.0</version>
+          <version>0.6.0</version>
         </dependency>
         <dependency>
           <groupId>br.usp.each.saeg</groupId>
           <artifactId>ba-dua-agent-rt</artifactId>
-          <version>0.8.0</version>
+          <version>0.6.0</version>
         </dependency>
       </dependencies>
 
@@ -452,7 +460,7 @@
                       <groupId>br.usp.each.saeg</groupId>
                       <artifactId>ba-dua-agent-rt</artifactId>
                       <classifier>all</classifier>
-                      <version>0.8.0</version>
+                      <version>0.6.0</version>
                     </artifactItem>
                   </artifactItems>
                 </configuration>
@@ -467,7 +475,7 @@
             <configuration>
               <argLine>@{argline}</argLine>
               <argLine>
-                -javaagent:badua/ba-dua-agent-rt-0.8.0-all.jar
+                -javaagent:badua/ba-dua-agent-rt-0.6.0-all.jar
                 -Doutput.file=target/coverage.ser
               </argLine>
             </configuration>
@@ -490,7 +498,7 @@
                     <argument>-input</argument>
                     <argument>${project.build.directory}/coverage.ser</argument>
                     <argument>-classes</argument>
-                    <argument>target/classes/org/apache/zookeeper/my</argument>
+                    <argument>target/classes/org/apache/zookeeper/common</argument>
                     <argument>-show-classes</argument>
                     <argument>-show-methods</argument>
                     <argument>-xml</argument>
