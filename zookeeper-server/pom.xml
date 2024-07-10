@@ -498,7 +498,7 @@
                     <argument>-input</argument>
                     <argument>${project.build.directory}/coverage.ser</argument>
                     <argument>-classes</argument>
-                    <argument>target/classes/org/apache/zookeeper/common</argument>
+                    <argument>target/classes/org/apache/zookeeper/common/</argument>
                     <argument>-show-classes</argument>
                     <argument>-show-methods</argument>
                     <argument>-xml</argument>
