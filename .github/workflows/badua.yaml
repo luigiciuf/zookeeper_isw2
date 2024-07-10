@@ -42,15 +42,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
         run: mvn clean verify -P badua
 
-      - name: Create reports directory if not exists
-        run: mkdir -p reports/surefire-reports
-
-      - name: Create target directory if not exists
-        run: mkdir -p reports
-
-      - name: Copy Surefire reports to reports directory
-        run: cp -R target/surefire-reports/* reports/surefire-reports/
-
       - name: Create badua reports directory if not exists
         run: mkdir -p zookeeper-server/target
 
