@@ -32,10 +32,10 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: mutation testing
-        run: mvn -B verify -P pit
+        run: mvn clean -P pit test
 
       - name: Upload PIT report
         uses: actions/upload-artifact@v3
         with:
           name: pit-reports
-          path: zookeeper-server/target/pit-reports/
+          path: my/pit-reports/
