@@ -33,7 +33,7 @@ jobs:
           cd ..
       - name: Build and analyze bookkeeper project
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: mvn clean  -P badua test
       - name: Upload report
         uses: actions/upload-artifact@v3
