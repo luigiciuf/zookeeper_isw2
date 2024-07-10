@@ -42,24 +42,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
         run: |
           mvn clean verify -P badua -Dfile.encoding=UTF-8
-
-      - name: Print target directory structure
-        run: |
-          echo "Printing target directory structure"
-          find target -type d
-
-      - name: Create reports directory if not exists
-        run: mkdir -p reports/surefire-reports
-
-      - name: Copy Surefire reports to reports directory
-        run: cp -R target/surefire-reports/* reports/surefire-reports/
-
-      - name: Create badua reports directory if not exists
-        run: mkdir -p zookeeper-server/target
-
-      - name: Copy BaDua reports to target directory
-        run: cp -R target/badua.xml zookeeper-server/target/
-
       - name: Upload report
         uses: actions/upload-artifact@v3
         with:
