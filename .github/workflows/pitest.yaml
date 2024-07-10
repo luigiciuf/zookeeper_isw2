@@ -38,4 +38,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: pit-reports
-          path: my/pit-reports/
+          path: zookeeper-server/target/pit-reports/
