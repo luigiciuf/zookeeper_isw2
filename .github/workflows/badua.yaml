@@ -1,10 +1,10 @@
 name: Badua-Coverage
 on:
   push:
-    branches:
-      - master
+    branches: ["ISW2"]
   pull_request:
-    types: [opened, synchronize, reopened]
+    branches: ["ISW2"]
+
 jobs:
   build:
     name: Build and analyze
