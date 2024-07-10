@@ -43,13 +43,16 @@ jobs:
         run: |
           mvn clean verify -P badua -Dfile.encoding=UTF-8
 
-      - name: Create target directories if not exist
+      - name: Print target directory structure
         run: |
-          mkdir -p target/classes/org/apache/zookeeper/common
-          mkdir -p reports/badua-reports
+          echo "Printing target directory structure"
+          find target -type d
+
+      - name: Create reports directory if not exists
+        run: mkdir -p reports/surefire-reports
 
       - name: Copy Surefire reports to reports directory
-        run: cp -R target/badua-reports/* reports/badua-reports/
+        run: cp -R target/surefire-reports/* reports/surefire-reports/
 
       - name: Create badua reports directory if not exists
         run: mkdir -p zookeeper-server/target
