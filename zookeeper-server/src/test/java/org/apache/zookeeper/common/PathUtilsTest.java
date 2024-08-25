@@ -16,7 +16,6 @@ import static org.mockito.Mockito.when;
 public class PathUtilsTest {
 
     private String path;
-    private Boolean isSequential;
     private boolean expectedException;
     public PathUtilsTest(String path, boolean expectedException){
         this.path=path;
